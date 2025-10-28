@@ -1,0 +1,185 @@
+---
+title: "Task1"
+author: "Slavka"
+date: "10/01/2024"
+format:
+  html:
+    embed-resources: true
+editor: source
+---
+
+# 11Atomic Types
+Question description
+
+Create the following variables related to your chosen object:
+- 4 numeric values (e.g., population, temperature, size, rating)  
+- 3 integer values (e.g., number of moons, buildings, inhabitants)  
+- 2 logical values (e.g., has_water, is_inhabited)  
+- 3 character values (e.g., name, region, category)
+
+```{r}
+# code for solving task
+#integer 
+population <- 81702 
+area <- 70 #square kilometers 
+number_of_districts <- 4 
+
+#charakter 
+city_name <- "Presov"
+city_old_name <- "Eperjes" 
+region <- "Presov Region" 
+
+#numeric
+average_temperature <- 9.3 
+city_budget_million <- 145.6 
+unemployment_rate <- 6.2 
+population_density <- 1167.17 
+
+#logical 
+has_university <- TRUE 
+is_capital <- FALSE
+```
+
+
+
+# 12Vectors
+Create three different vectors:
+
+1. **Numeric vector** combining all your numeric and integer variables.  
+   *(Use `c()`.)*
+
+2. **Sequence vector** from any number between 10–50 to 100, Choose step between 2 and 10.  
+   *(Use `seq()` or `:`.)*
+
+3. **Logical vector** of length 10 with random `TRUE`/`FALSE` values using `sample()`.
+
+```{r}
+#_code for solving task
+# 1. Numeric vector
+numeric_vector <- c(population, area, number_of_districts, average_temperature,
+                    city_budget_million, unemployment_rate, population_density)
+numeric_vector
+
+
+# 2. Sequence vector
+sequence_vector <- seq(20, 100, by = 10)
+sequence_vector
+
+
+
+
+# 3. Logical vector
+logical_vec <- sample(c(TRUE, FALSE), size = 10, replace = TRUE)
+logical_vec
+
+```
+### 13MATRIX
+Create a **3×3 matrix** with random numbers between **-50 and 50**  
+(using `sample()` or `runif()`), and name its **rows and columns** according to your theme.
+
+```{r}
+#_code for solving task
+set.seed(123)  # so results stay the same each time
+my_matrix <- matrix(sample(-50:50, 9, replace = TRUE), nrow = 3, ncol = 3)
+
+# Name rows and columns according to your theme
+rownames(my_matrix) <- c("Center", "North", "South")
+colnames(my_matrix) <- c("Economy", "Education", "Transport")
+
+my_matrix
+
+# Row and column averages
+rowMeans(my_matrix)
+colMeans(my_matrix)
+
+```
+# 14LIST
+Create a **list** that combines all your previous objects:  
+atomic variables, vectors, and matrix.
+Add one extra element — a short **description** of your universe as a string.
+```{r}
+#_code for solving task
+presov_list <- list(
+  city_name = city_name,
+  region = region,
+  population = population,
+  numeric_vector = numeric_vector,
+  sequence_vector = sequence_vector,
+  logical_vec = logical_vec,
+  matrix = my_matrix,
+  description = "This is the data universe of Presov — a Slovak city full of culture, students, and history!"
+)
+
+# View the list
+presov_list
+```
+
+
+
+```{r}
+
+```
+
+
+
+
+
+```{r}
+
+```
+
+
+
+
+
+# 15Factor
+Create a **factor variable** representing categories within your universe, e.g.:
+
+
+
+- `"low"`, `"medium"`, `"high"`  
+- `"infant"`, `"child"`, `"adult"`  
+- `"poor"`, `"average"`, `"rich"`
+
+Make sure you have **at least 5 observations** total.  
+Then use `table()` to show how many objects fall into each category.
+```{r}
+#code_for solving task
+
+city_size <- factor(c("medium", "large", "large", "medium", "small", "large", "medium"))
+
+# Display counts
+table(city_size)
+```
+# 16Data Frame
+Create a **data frame** related to your object that includes:
+
+1. **5–8 observations** (rows)  
+2. **At least 3 columns** of different data types  
+   (e.g., name, numeric value, logical flag, category)
+   
+```{r}
+#_code for solving task
+presov_df <- data.frame(
+  District = c("Solivar", "Sekcov", "Trojica", "Calvary", "Delna"),
+  Population = c(14000, 21000, 13000, 18000, 15702),
+  Has_School = c(TRUE, TRUE, TRUE, FALSE, TRUE),
+  Area_km2 = c(12.3, 20.1, 9.4, 15.8, 12.4),
+  Category = factor(c("residential", "residential", "historic", "suburban", "mixed"))
+)
+
+# Rename columns (optional)
+colnames(presov_df) <- c("District_Name", "Population", "Has_School", "Area_km2", "Category")
+
+# Structure and summary
+str(presov_df)
+summary(presov_df)
+
+# Add new derived column: population density per district
+presov_df$Density <- presov_df$Population / presov_df$Area_km2
+
+# Show final data frame
+presov_df
+```
+
+
