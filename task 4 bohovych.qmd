@@ -1,0 +1,753 @@
+---
+title: "Task1"
+author: "Slavka"
+date: "10/01/2024"
+format:
+  html:
+    embed-resources: true
+editor: source
+---
+
+# 11Atomic Types
+Question description
+
+Create the following variables related to your chosen object:
+- 4 numeric values (e.g., population, temperature, size, rating)  
+- 3 integer values (e.g., number of moons, buildings, inhabitants)  
+- 2 logical values (e.g., has_water, is_inhabited)  
+- 3 character values (e.g., name, region, category)
+
+```{r}
+# code for solving task
+#integer 
+population <- 81702 
+area <- 70 #square kilometers 
+number_of_districts <- 4 
+
+#charakter 
+city_name <- "Presov"
+city_old_name <- "Eperjes" 
+region <- "Presov Region" 
+
+#numeric
+average_temperature <- 9.3 
+city_budget_million <- 145.6 
+unemployment_rate <- 6.2 
+population_density <- 1167.17 
+
+#logical 
+has_university <- TRUE 
+is_capital <- FALSE
+```
+
+
+
+# 12Vectors
+Create three different vectors:
+
+1. **Numeric vector** combining all your numeric and integer variables.  
+   *(Use `c()`.)*
+
+2. **Sequence vector** from any number between 10–50 to 100, Choose step between 2 and 10.  
+   *(Use `seq()` or `:`.)*
+
+3. **Logical vector** of length 10 with random `TRUE`/`FALSE` values using `sample()`.
+
+```{r}
+#_code for solving task
+# 1. Numeric vector
+numeric_vector <- c(population, area, number_of_districts, average_temperature,
+                    city_budget_million, unemployment_rate, population_density)
+numeric_vector
+
+
+# 2. Sequence vector
+sequence_vector <- seq(20, 100, by = 10)
+sequence_vector
+
+
+
+
+# 3. Logical vector
+logical_vec <- sample(c(TRUE, FALSE), size = 10, replace = TRUE)
+logical_vec
+
+```
+### 13MATRIX
+Create a **3×3 matrix** with random numbers between **-50 and 50**  
+(using `sample()` or `runif()`), and name its **rows and columns** according to your theme.
+
+```{r}
+#_code for solving task
+set.seed(123)  # so results stay the same each time
+my_matrix <- matrix(sample(-50:50, 9, replace = TRUE), nrow = 3, ncol = 3)
+
+# Name rows and columns according to your theme
+rownames(my_matrix) <- c("Center", "North", "South")
+colnames(my_matrix) <- c("Economy", "Education", "Transport")
+
+my_matrix
+
+# Row and column averages
+rowMeans(my_matrix)
+colMeans(my_matrix)
+
+```
+# 14LIST
+Create a **list** that combines all your previous objects:  
+atomic variables, vectors, and matrix.
+Add one extra element — a short **description** of your universe as a string.
+```{r}
+#_code for solving task
+presov_list <- list(
+  city_name = city_name,
+  region = region,
+  population = population,
+  numeric_vector = numeric_vector,
+  sequence_vector = sequence_vector,
+  logical_vec = logical_vec,
+  matrix = my_matrix,
+  description = "This is the data universe of Presov — a Slovak city full of culture, students, and history!"
+)
+
+# View the list
+presov_list
+```
+
+
+
+```{r}
+
+```
+
+
+
+
+
+```{r}
+
+```
+
+
+
+
+
+# 15Factor
+Create a **factor variable** representing categories within your universe, e.g.:
+
+
+
+- `"low"`, `"medium"`, `"high"`  
+- `"infant"`, `"child"`, `"adult"`  
+- `"poor"`, `"average"`, `"rich"`
+
+Make sure you have **at least 5 observations** total.  
+Then use `table()` to show how many objects fall into each category.
+```{r}
+#code_for solving task
+
+city_size <- factor(c("medium", "large", "large", "medium", "small", "large", "medium"))
+
+# Display counts
+table(city_size)
+```
+# 16Data Frame
+Create a **data frame** related to your object that includes:
+
+1. **5–8 observations** (rows)  
+2. **At least 3 columns** of different data types  
+   (e.g., name, numeric value, logical flag, category)
+   
+```{r}
+#_code for solving task
+presov_df <- data.frame(
+  District = c("Solivar", "Sekcov", "Trojica", "Calvary", "Delna"),
+  Population = c(14000, 21000, 13000, 18000, 15702),
+  Has_School = c(TRUE, TRUE, TRUE, FALSE, TRUE),
+  Area_km2 = c(12.3, 20.1, 9.4, 15.8, 12.4),
+  Category = factor(c("residential", "residential", "historic", "suburban", "mixed"))
+)
+
+# Rename columns (optional)
+colnames(presov_df) <- c("District_Name", "Population", "Has_School", "Area_km2", "Category")
+
+# Structure and summary
+str(presov_df)
+summary(presov_df)
+
+# Add new derived column: population density per district
+presov_df$Density <- presov_df$Population / presov_df$Area_km2
+
+# Show final data frame
+presov_df
+```
+
+#Task 2 Yaroslava Bohovych 
+
+
+## Task 2: Subsetting & Missing Data in Your Mini-Universe
+
+### 2.1. Querying Vectors
+
+Let's start with the vectors you created in **Task 1**.
+
+#2.1.1. From your **Sequence vector** (the one with all your numbers):
+
+- Select and print the 3rd element.
+- Select and print elements 2 through 5.
+- Select and print all values that are greater than 20 (or another number that makes sense for your data).
+
+
+
+```{r}
+# Select and print the 3rd element
+sequence_vector[3]
+
+# Select and print elements 2 through 5
+sequence_vector[2:5]
+
+# Select and print all values greater than 50
+sequence_vector[sequence_vector > 50]
+```
+
+
+#2.1.2. From your **Logical vector**:
+
+- Select and print only the TRUE values. (Hint: `your_vector[your_vector]`).
+- Use `which()` to get the indices (positions) of all the `TRUE` values.
+
+
+```{r}
+# Select and print only the TRUE values
+logical_vec[logical_vec]
+
+# Get indices (positions) of all TRUE values
+which(logical_vec)
+```
+
+
+### 2.2. Querying Your "Universe" List
+
+Use your main list from **Task 1**.
+
+- Access and print the **description** string using the `$` operator
+- Access and print your **3x3 matrix** using double brackets `[[ ]]`.
+- Access and print the **second element** from your **vector element** within the list. (This will be a "list-within-a-list" access).
+
+```{r}
+# Access and print the description string using $
+presov_list$description
+
+# Access and print your 3x3 matrix using double brackets [[ ]]
+presov_list[[7]]   # or presov_list$matrix
+
+# Access and print the 2nd element from your numeric vector inside the list
+presov_list$numeric_vector[2]
+
+```
+
+
+### 2.3. Investigating Your Data Frame
+
+Use the **data frame** you created in **Task 1**.
+
+- Print the **first 3 rows**. (Use `head()`.)
+- Print the value from the **4th row, 1st column**.
+- Print only the column that contains your logical values (e.g., `is_habitable`) as a vector.
+
+**Logical Subsetting**: Create a new data frame `df_subset` that contains only the rows that meet a specific logical condition.
+
+- Example: `df_subset <- your_df[your_df$population > 1000, ]`
+
+`%in%` **Subsetting**: Create a new data frame `df_subset_2` that selects rows belonging to **two specific categories** from your factor or character column.
+
+- Example: `df_subset_2 <- your_df[your_df$region %in% c("North", "South"), ]`
+
+```{r}
+# Print the first 3 rows of your data frame
+head(presov_df, 3)
+
+# Print the value from the 4th row, 1st column
+presov_df[4, 1]
+
+# Print only the logical column (Has_School)
+presov_df$Has_School
+
+
+# Logical Subsetting: keep only districts with population > 15000
+presov_subset <- presov_df[presov_df$Population > 15000, ]
+presov_subset
+
+# %in% Subsetting: select districts with "residential" or "historic" category
+presov_subset_2 <- presov_df[presov_df$Category %in% c("residential", "historic"), ]
+presov_subset_2
+
+
+```
+
+### 2.4. Handling "Corrupted" Data (`NA`)
+
+Create a copy of your original data frame (e.g., `df_corrupted <- your_df`).
+
+**Introduce 3 `NA`s** into your df_corrupted at specific locations.
+
+- Example: `df_corrupted[2, 3] <- NA`
+
+**Find `NAs`**:
+
+- Use `sum(is.na(df_corrupted)`) to find the **total number** of missing values.
+- Use `colSums(is.na(df_corrupted))` to see how many `NA`s are in **each column**.
+
+**Calculate with `NA`s**:
+
+- Calculate the `mean()` of the numeric column where you added an `NA`.
+
+**Filter `NA`s**:
+
+- Use `na.omit(df_corrupted)` to create a new, "clean" data frame that contains only the complete rows.
+
+
+```{r}
+# Create a copy of your original data frame
+presov_corrupted <- presov_df
+
+# Introduce 3 NA values at specific locations
+presov_corrupted[2, 2] <- NA    # Missing population for Sekcov
+presov_corrupted[4, 3] <- NA    # Missing Has_School for Calvary
+presov_corrupted[5, 5] <- NA    # Missing Category for Delna
+
+# Find total number of missing values
+sum(is.na(presov_corrupted))
+
+# Find how many NAs per column
+colSums(is.na(presov_corrupted))
+
+# Calculate mean of Population (will return NA)
+mean(presov_corrupted$Population)
+
+# Calculate mean ignoring NAs
+mean(presov_corrupted$Population, na.rm = TRUE)
+
+# Remove rows with NAs
+presov_clean <- na.omit(presov_corrupted)
+presov_clean
+
+```
+
+### 2.5. Bonus Challenge: `which()`
+
+Use `which.max()` or `which.min()` to find the **row number** (index) of the observation with the highest or lowest value in one of your numeric columns.
+
+```{r}
+# Find index of the row with the highest Population
+highest_pop_index <- which.max(presov_df$Population)
+
+# Print that row
+presov_df[highest_pop_index, ]
+
+# Find index of the row with the smallest Area_km2
+smallest_area_index <- which.min(presov_df$Area_km2)
+
+# Print that row
+presov_df[smallest_area_index, ]
+```
+
+## Task 3: Expanding Your Universe
+
+Your "mini-universe" in Tasks 1 & 2 was a simulation. Now, it's time to connect it to the real world.
+
+Your mission is to find a real dataset that expands on your theme, import it into R, and explore it using the dplyr package.
+
+### 3.1. The Quest: Find Your Data
+
+Find one simple, real-world dataset that fits your theme.
+
+- **Where to look:** Kaggle, TidyTuesday, data.gov, or other public data portals.
+
+- **Format:** Any format you are able to read. For simplicity it is proposed to use **textual (csv, txt)** or **Excel** format.
+
+- **Requirements:**
+
+    - At least 50 rows.
+
+    - At least 4 columns.
+
+    - A mix of numeric and character/factor data.
+
+- **Action:**
+
+    1. Download the data file and place it in your R project directory.
+
+    2. In your task file add a line with the link to the data source (e.g., Data from: https://...).
+    
+    ### 3.2. The Import: Load Your Data
+
+1. **Install** `tidyverse`: If you haven't, run `install.packages("tidyverse")` in your console (just once).
+
+2. **Load libraries:** At the top of your script, add `library(dplyr)` and `library(readr)` (`library(readxl)` in case of Excel file format).
+
+3. **Read the data:** Use `read_csv()` (or `read_excel()`) to load your dataset into a new data frame.
+
+```{r}
+# Load Libraries
+library(dplyr)
+library(readr)
+
+# Load the dataset (make sure zoo.csv is in your project folder)
+zoo_data <- read_csv("zoo.csv")
+
+# Inspect the dataset
+glimpse(zoo_data)
+head(zoo_data)
+summary(zoo_data)
+```
+
+### 3.3. The Interrogation: Explore with `dplyr`
+
+This is the core of the task. Your goal is to **ask and answer 5 interesting questions** about your new dataset.
+
+You must write the question in plain English (as a comment), followed by the `dplyr` code that answers it.
+
+You **must** use each of the following `dplyr` "verbs" at least once:
+
+- `select()` - To pick specific columns.
+
+- `filter()` - To subset rows based on a condition.
+
+- `arrange()` - To sort your results (e.g., with desc()).
+
+- `mutate()` - To create a new column.
+
+`group_by()` and `summarise()` - To get summary statistics (like `mean()`, `n()`, `max()`, etc.).
+
+**Your 5 Questions (example):**
+
+#*Question 1:
+Which 10 animals have the highest number of legs?
+
+
+
+```{r}
+# Q1: Animals with the most legs
+zoo_data %>%
+  select(animal_name, legs) %>%
+  arrange(desc(legs)) %>%
+  head(10)
+```
+
+
+#*Question 2:
+How many animals belong to each class type?
+
+```{r}
+# Q2: Count animals in each class
+zoo_data %>%
+  group_by(class_type) %>%
+  summarise(count = n())
+```
+
+#*Question 3:
+Which animals are both predators and airborne?
+
+```{r}
+# Q3: Airborne predators
+zoo_data %>%
+  filter(predator == 1, airborne == 1) %>%
+  select(animal_name, predator, airborne)
+```
+
+#*Question 4:
+Create a new variable: “is_mammal” (1 = hair + milk). List 10 mammals.
+
+```{r}
+# Q4: New column for mammals
+zoo_mammals <- zoo_data %>%
+  mutate(is_mammal = ifelse(hair == 1 & milk == 1, 1, 0)) %>%
+  filter(is_mammal == 1) %>%
+  select(animal_name, hair, milk)
+
+zoo_mammals %>% head(10)
+```
+
+#*Question 5:
+Which animals have the fewest legs, sorted alphabetically?
+
+```{r}
+# Q5: Animals with the fewest legs
+zoo_data %>%
+  filter(legs == min(legs)) %>%
+  select(animal_name, legs) %>%
+  arrange(animal_name)
+```
+
+
+## Task 4. Building a "Toolkit" for Your Universe (Functions)
+
+In Task 3, you performed a "one-off" analysis of your new dataset. In the real world, you'll want to run that analysis again and again.
+
+The best way to do this is by capturing your code inside **functions**. A function is a reusable "tool" that you build to perform a specific job.
+
+Your mission is to build a "toolkit" of functions that can analyse the dataset you found in Task 3.
+
+**Important:** You must use the **same dataset** and theme you used in Task 3.
+
+### 4.1. The "Greeting" Function (A Simple Start)
+
+Let's start with the basics. Write a simple function that prints a welcome message for your "universe".
+
+1. **Write the function:** It should take at least one argument (e.g., `your_name` or `universe_name`).
+
+2. **Inside the function:** Use `print()` or `cat()` to display a message.
+
+3. **Call the function:** After you define the function, you must call it to see the result.
+
+```{r}
+welcome_to_my_universe <- function(your_name) {
+  cat("---------------------------------------\n")
+  cat(" Welcome to the ZOO ANALYSIS TOOLKIT\n")
+  cat(" Report prepared by:", your_name, "\n")
+  cat("---------------------------------------\n")
+}
+
+# Call the function
+welcome_to_my_universe("Slavka Bohovych")
+```
+
+### 4.2. The "Loading" Function (A Good Practice)
+
+In Task 3, you wrote code to load and inspect your data. Let's turn that into a function. This is a very common and useful practice.
+
+1. **Write the function:** Name it `load_and_inspect`. It should take one argument: `file_path`.
+
+2. **Inside the function:**
+
+  - Load the `readr` and `dplyr` libraries.
+
+  - Use `read_csv(file_path)` to load the data.
+
+  - Print a message (e.g., "Data loaded successfully.").
+
+  - Print the `glimpse()` of the data.
+
+  - Print the `head()` of the data.
+
+  - **Return** the data frame (use the `return()` command).
+
+3. **Call the function:**
+
+```{r}
+load_and_inspect <- function(file_path) {
+  library(dplyr)
+  library(readr)
+  
+  data <- read_csv(file_path)
+  
+  cat("\n--- Data Loaded Successfully from:", file_path, "---\n")
+  
+  print(glimpse(data))
+  
+  cat("\n--- First 6 Rows ---\n")
+  print(head(data))
+  
+  return(data)
+}
+
+# Call:
+my_zoo <- load_and_inspect("zoo.csv")
+```
+
+### 4.3. The "Query" Function (The Core of the Task)
+
+This is the most important step. You will turn one of your `dplyr` queries from **Task 3** into a reusable function.
+
+Look back at your Task 3 code. You probably wrote something like this:
+
+  - `my_data |> filter(population > 1000000)`
+
+  - `my_data |> filter(planet_type == "Gas Giant")`
+
+That 1000000 or "Gas Giant" is a "magic number" or "magic string". A function lets you turn it into a parameter.
+
+1. **Choose a query:** Pick one of your `filter()` or `summarise()` queries from Task 3.
+
+2. **Write the function:**
+  
+  - Give it a descriptive name (e.g., `find_pollution_by_disctrict`, `filter_cities_by_population`).
+
+  - It must take at least two arguments: **data** (for the data frame) and a **parameter** for the value you want to change (e.g., `pop_threshold` or `type_name`).
+
+  - The function should perform the `dplyr` query and `return` the result.
+
+
+```{r}
+find_animals_with_traits <- function(data, airborne_value, predator_value) {
+  result <- data %>%
+    filter(airborne == airborne_value, predator == predator_value) %>%
+    select(animal_name, airborne, predator)
+  
+  return(result)
+}
+
+# Example call:
+find_animals_with_traits(my_zoo, airborne_value = 1, predator_value = 1)
+```
+
+### 4.4. The "Reporting" Function
+
+Let's combine everything. Write a single function that calculates several key statistics for a specific **group** or **category** in your data.
+
+1. **Write the function:** Name it `generate_report`. It should take `data` and a `category_name` as arguments (e.g., a specific city, planet type, or region).
+
+2. **Inside the function**:
+
+    - `filter()` your data for only the `category_name` provided.
+
+    - Calculate 3-4 interesting summary statistics (e.g., `mean()`, `max()`, `min()`, `n()`).
+
+    - Use `cat()` to print a nicely formatted "report" to the console.
+
+**Example:**
+
+```{r}
+generate_report <- function(data, class_number) {
+
+  class_data <- data %>% 
+    filter(class_type == class_number)
+  
+  avg_legs <- mean(class_data$legs, na.rm = TRUE)
+  predator_ratio <- mean(class_data$predator, na.rm = TRUE)
+  count_animals <- nrow(class_data)
+  
+  cat("----------------------------------------\n")
+  cat(" REPORT FOR CLASS TYPE:", class_number, "\n")
+  cat("----------------------------------------\n")
+  cat("Number of Animals:", count_animals, "\n")
+  cat("Average Number of Legs:", round(avg_legs, 2), "\n")
+  cat("Proportion of Predators:", round(predator_ratio, 2), "\n")
+  cat("----------------------------------------\n\n")
+}
+
+# Run reports for two classes
+generate_report(my_zoo, 1)
+generate_report(my_zoo, 6)
+```
+## Task 5. Visualising Your Universe (Base R & ggplot2)
+
+You have found your data (Task 3) and built tools to analyse it (Task 4). Now, you must present your findings to customers.
+
+Your goal is to create four specific visualizations based on the real-world dataset you imported in Task 3.
+
+**Prerequisites:**
+
+  - Use the dataset you found and cleaned in Task 3.
+
+  - Make sure `library(ggplot2)` is loaded.
+
+  - **Crucial:** Every plot must have a **Title**, **x-axis label**, and **y-axis label** that make sense for your specific theme.
+  
+### 5.1. The Quick Sketch (Base R Histogram)
+
+Sometimes you need a quick look at the distribution of your data without loading heavy packages.
+
+  1. Choose one **numeric variable** from your dataset (e.g., `price`, `temperature`, `speed`).
+
+  2. Use the `hist()` function from base R.
+
+  3. Customise the `main` title, `xlab`, and the bar `col` (colour).
+```{r}
+# Histogram of number of legs
+hist(zoo_data$legs,
+     main = "Distribution of Number of Legs in Zoo Animals",
+     xlab = "Number of Legs",
+     col = "lightblue",
+     border = "white")
+```
+
+### 5.2. The Relationship Map (ggplot2 Scatter Plot)
+
+Now, let's look for patterns using the industry-standard package, **ggplot2**.
+
+  1. Choose **two numeric variables** to see if they are correlated.
+
+  2. Create a scatter plot using `geom_point()`.
+  
+  3. Add `geom_smooth()` to add a relationship between variables to the plot.
+
+  4. Add `labs()` to rename your axes and title.
+```{r}
+library(ggplot2)
+
+ggplot(data = zoo_data, aes(x = legs, y = eggs)) +
+  geom_point(alpha = 0.6, size = 3, colour = "blue") +
+  geom_smooth(colour = "gray") +
+  labs(
+    title = "Relationship Between Number of Legs and Egg Laying",
+    subtitle = "Zoo Animals Dataset",
+    x = "Number of Legs",
+    y = "Eggs (1 = lays eggs, 0 = does not)",
+    color = "Legend"
+  ) +
+  theme_minimal()
+```
+
+### 5.3. The Comparison (ggplot2 Boxplot)
+
+3. The Comparison (ggplot2 Boxplot)
+
+Boxplots are excellent for comparing groups. Let's see how different categories in your universe perform.
+
+  1. Choose a **categorical (or logical) variable** for the X-axis (e.g., city, planet_type, species).
+
+  2. Choose a **numeric variable** for the Y-axis (e.g., price, gravity, lifespan).
+
+  3. Create a plot using `geom_boxplot()`.
+
+  4. **Bonus:** Use `fill` to colour the boxes by the same category.
+
+```{r}
+ggplot(data = zoo_data, aes(x = factor(class_type), y = legs, fill = factor(class_type))) +
+  geom_boxplot() +
+  labs(
+    title = "Comparison of Number of Legs Across Animal Classes",
+    x = "Class Type",
+    y = "Number of Legs"
+  ) +
+  theme_light() +
+  theme(legend.position = "none")
+```
+
+### 5.4. The "Deep Dive" (Faceting or Custom)
+
+The most powerful feature of `ggplot2` is faceting—creating small multiples of the same plot for different groups.
+
+  1. Create a plot (histogram, bar plot, or scatter plot).
+
+  2. Use `facet_wrap(~ your_category_variable)` to split the plot into a separate panel for each group in your data.
+
+  3. This is incredibly useful for comparing distinct groups (e.g., separate charts for each City or Year).
+```{r}
+ggplot(data = zoo_data, aes(x = legs)) +
+  geom_histogram(bins = 10, fill = "coral", color = "black") +
+  facet_wrap(~ class_type) +
+  labs(
+    title = "Distribution of Animal Leg Counts by Class Type",
+    x = "Number of Legs",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+### 5.5. Final Step: Exporting (Saving Your Work)
+
+A plot is useless if you can't put it in a report.
+
+  1. Choose your favourite plot from the exercises above.
+
+  2. Run the code to display it in R.
+
+  3. Immediately run the following command to save it to your project folder:
+
+```{r}
+ggsave("my_universe_plot.png", width = 8, height = 6)
+```
+
